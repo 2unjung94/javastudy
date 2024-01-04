@@ -6,6 +6,8 @@ public class MainClass {
     // 해당 라인 지워주는 단축키 : CTRL+D
     // 소스코드 옮기기 단축키 : ALT + 방향키
     // syso 또는 sysout CTRL+SPACE 하면 println 바로 생성
+    // 문장 자체 복사는 복사할 구문 커서 두고 CTRL+ALT 방향키
+
     
     /*
      * 메모리
