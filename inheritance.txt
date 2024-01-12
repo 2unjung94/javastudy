@@ -1,0 +1,18 @@
+MemberService.java 		- 부모
+  void execute(){ }
+
+	LoginService.java		- 자식
+	@Override
+	void execute() { 코드 }
+
+	LogoutService.java	- 자식
+	@Override
+	void execute() { 코드 }
+
+Memberservice 실행에서 void execute(){ }의 실행은 신경 끄자. 이건 override 때문에 있는 것이기 때문에.
+
+----------------------------------------
+ 	/user/login.do		new LoginService();	service.execute();
+	/user/logout.do		new LogoutService();	service.execute();
+
+-> service.exeucte()한줄로 멤버서비스를 제공하는 거로 만들면 된다.

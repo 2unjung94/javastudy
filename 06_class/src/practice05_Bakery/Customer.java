@@ -47,13 +47,12 @@ public class Customer {
     BreadChange breadChange = null;
     if( bakery != null ) {
       breadChange = bakery.sell(money, count);
-      System.out.println(breadChange.getBread() + " " + breadChange.getChange());
     }
     
     // 구매 결과 처리 -> 판매를 실패하는 경우 breadChange는 null 값이다.
     if(breadChange != null) {
-      count += breadChange.getBread();
-      money += breadChange.getChange();
+      count += breadChange.getBread();  // this.count += breadChange.getBread();으로 교체하면 다시 3500이 됨 
+      money += breadChange.getChange(); // this.money += breadChange.getChange();으로 교체하면 다시 3500이 됨 
       this.money -= money;
     }
   }
