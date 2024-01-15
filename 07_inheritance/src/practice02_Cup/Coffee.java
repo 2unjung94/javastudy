@@ -1,4 +1,4 @@
-package practiice02_Cup;
+package practice02_Cup;
 
 // 부모
 // 호출 = 실행 : 정적 바인딩

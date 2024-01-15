@@ -1,4 +1,4 @@
-package practiice02_Cup;
+package practice02_Cup;
 
 public class MainClass {
   
