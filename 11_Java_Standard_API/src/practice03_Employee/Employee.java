@@ -1,5 +1,7 @@
 package practice03_Employee;
 
+import java.util.Objects;
+
 public class Employee {
 
   // field
@@ -30,9 +32,26 @@ public class Employee {
     this.name = name;
   }
   
+  
   public void info() {
     System.out.println("사원번호 : " + empNo);
     System.out.println("사원명 : " + name);
+  }
+  @Override
+  public int hashCode() {
+    return Objects.hash(empNo);
+  }
+  
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+//    if (getClass() != obj.getClass())
+//      return false;                   // 타입은 Employee 이지만 저장된건 Regular, PartTime 이므로
+    Employee other = (Employee) obj;
+    return empNo == other.empNo;
   }
   
   

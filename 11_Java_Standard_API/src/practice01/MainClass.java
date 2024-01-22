@@ -1,8 +1,12 @@
 package practice01;
 
+import java.security.SecureRandom;
+
 // import 자동 입력 crtl + shift + o
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -236,21 +240,34 @@ public class MainClass {
     
   }
 
+  static final String FINAL_STRING = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  static SecureRandom rnd = new SecureRandom();
   public static void method6() {
+   
+   // SecureRandom을 이용해 "대문자+소문자+숫자"로 구성된 임의의 인증번호 만들기
+   // 실행예시1)
+   //   몇 자리의 인증번호를 생성할까요? >>> 4
+   //   생성된 4자리 인증번호는 7W5e입니다.
+   // 실행예시2)
+   //   몇 자리의 인증번호를 생성할까요? >>> 6
+   //   생성된 6자리 인증번호는 Fa013b입니다.
     
-    // SecureRandom을 이용해 "대문자+소문자+숫자"로 구성된 임의의 인증번호 만들기
-    // 실행예시1)
-    //   몇 자리의 인증번호를 생성할까요? >>> 4
-    //   생성된 4자리 인증번호는 7W5e입니다.
-    // 실행예시2)
-    //   몇 자리의 인증번호를 생성할까요? >>> 6
-    //   생성된 6자리 인증번호는 Fa013b입니다.
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("몇 자리의 인증번호를 생성할까요? >>>");
+    int num = scanner.nextInt();
+    scanner.close();
+   
+    StringBuilder sb = new StringBuilder(num);
+    for(int i = 0; i < num; i++)
+    sb.append(FINAL_STRING.charAt(rnd.nextInt(FINAL_STRING.length())));
+    
+    System.out.println("생성된 " + num + "자리 인증번호는 "+ sb.toString() + "입니다.");
     
   }
 
   public static void method7() {
 
-    // UpDown 게임
+ // UpDown 게임
     // 컴퓨터가 1 ~ 10000 사이의 난수를 발생시킨다.
     // 사용자는 해당 난수를 맞힌다.
     // 실행예시)
@@ -261,25 +278,55 @@ public class MainClass {
     // ...
     // 입력 >>> 4500
     // 정답입니다. 총 5번만에 성공했습니다.
+     int random = (int)(Math.random() * 10000 + 1);
+     int count = 1;
+     int input = 0;
+     
+     Scanner sc = new Scanner(System.in);
+     while(true) {
+       System.out.println("입력 >>> ");
+       input = sc.nextInt();
+       if( input > random) {
+         System.out.println("down!");
+         count++;
+       } else if( input < random) {
+         System.out.println("Up!");
+         count++;
+       } else {
+         sc.close();
+         System.out.println("정답입니다. 총 " + count + "번만에 성공했습니다.");
+         break;
+       }
+     }  
     
     
   }
 
   public static void method8() {
 
-    // 0~9 사이 난수를 100개 발생시키고 발생한 난수들이 생성된 횟수(빈도수)를 그래프화 하여 출력하시오.
-    // 실행예시)
-    // 0 : #### 4
-    // 1 : ############ 12
-    // 2 : ############ 12
-    // 3 : ##### 5
-    // 4 : ######## 8
-    // 5 : ########### 11
-    // 6 : ############ 12
-    // 7 : ################## 18
-    // 8 : ####### 7
-    // 9 : ########### 11
+    List<Integer> random = new ArrayList<Integer>();
+    List<String> sharp = new ArrayList<String>();
+    int[] countNum = new int[10];
+    String s = "";
+      
+    for(int i = 0 ; i < 100 ; i++) {
+      random.add((int)(Math.random() * 10));
+      for(int j = 0 ; j < countNum.length; j++) {
+        if(random.get(i) == j) {
+          countNum[j]++;
+        } 
+      }
+    }
     
+    // System.out.println(random.toString());
+    for(int k = 0 ; k < countNum.length ; k++) {
+      for(int l = 0 ; l < countNum[k]; l++) {
+        s += "#";
+      }
+      sharp.add(k, s);
+      System.out.println(k + " : " + sharp.get(k) +" "+countNum[k]); 
+      s = "";  
+    }
     
   }
   
@@ -310,6 +357,31 @@ public class MainClass {
     //  14 20 11 19  6
     //   8 17  5 12  7
     //  16 22 18 24 23
+    int[][] bingo1 = new int[5][5];
+    int[][] bingo2 = new int[5][5];
+    int [] random = new int[5];
+    
+    
+    for(int m = 0 ; m < random.length ; m++) {
+      random[m] = (int)(Math.random() * 5 );
+      for(int n = 0; n < m ; n++) {
+        if(random[m] == random[n]) {
+          m--;
+          break;
+        }
+      }
+    }
+    
+    int num = 1;
+    
+    for(int i = 0 ; i < 5; i++) {    
+      for(int j = 0; j < 5; j++) {
+        bingo1[i][j] = num;
+        num++;
+        System.out.print(String.format("%3d", bingo1[i][j])); 
+      }
+      System.out.println();
+    }
     
   }
     
@@ -325,6 +397,7 @@ public class MainClass {
 //    method3();
 //    method4();
 //    method5();
+    method9();
  
   }
 
