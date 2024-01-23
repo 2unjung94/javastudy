@@ -286,7 +286,7 @@ public class MainClass {
      while(true) {
        System.out.println("입력 >>> ");
        input = sc.nextInt();
-       if( input > random) {
+       if(input > random) {
          System.out.println("down!");
          count++;
        } else if( input < random) {
@@ -303,6 +303,18 @@ public class MainClass {
   }
 
   public static void method8() {
+    // 0~9 사이 난수를 100개 발생시키고 발생한 난수들이 생성된 횟수(빈도수)를 그래프화 하여 출력하시오.
+    // 실행예시)
+    // 0 : #### 4
+    // 1 : ############ 12
+    // 2 : ############ 12
+    // 3 : ##### 5
+    // 4 : ######## 8
+    // 5 : ########### 11
+    // 6 : ############ 12
+    // 7 : ################## 18
+    // 8 : ####### 7
+    // 9 : ########### 11
 
     List<Integer> random = new ArrayList<Integer>();
     List<String> sharp = new ArrayList<String>();
@@ -330,6 +342,25 @@ public class MainClass {
     
   }
   
+  // 난수 생성
+  
+  // https://chichibaby.tistory.com/31 참고로 짜보기
+  public static int[] randomArray() {
+    int[] random = new int[5];
+    
+    for(int n = 0 ; n <random.length ; n++) {
+      int temp = (int)(Math.random() * 5);
+      random[n] = temp;
+      
+      for(int m = 0 ; m < n ; m++) {
+        if(random[m] == temp) {
+          n--;
+          break;
+        }
+      }
+    }
+    return random;
+  }
   public static void method9() {
     
     // 5 x 5 숫자 빙고판 자동 생성
@@ -359,29 +390,37 @@ public class MainClass {
     //  16 22 18 24 23
     int[][] bingo1 = new int[5][5];
     int[][] bingo2 = new int[5][5];
-    int [] random = new int[5];
+
+    int[] random1 = randomArray();
+    int[] random2 = randomArray();
     
     
-    for(int m = 0 ; m < random.length ; m++) {
-      random[m] = (int)(Math.random() * 5 );
-      for(int n = 0; n < m ; n++) {
-        if(random[m] == random[n]) {
-          m--;
-          break;
-        }
-      }
-    }
-    
+    // 2차원 배열 생성
+    System.out.println("2차원 배열 생성");
     int num = 1;
-    
     for(int i = 0 ; i < 5; i++) {    
       for(int j = 0; j < 5; j++) {
         bingo1[i][j] = num;
         num++;
-        System.out.print(String.format("%3d", bingo1[i][j])); 
+        
+        System.out.print(String.format("%3d", bingo1[i][j]));
+
       }
       System.out.println();
     }
+    System.out.println();
+    
+    System.out.println("배열 변환");
+    for(int n = 0 ; n < 5; n++) {
+      for(int m = 0 ; m < 5; m++) {
+        bingo2[n][m] = bingo1[random1[n]][random2[m]];
+        System.out.print(String.format("%3d", bingo2[n][m]));
+      }
+      System.out.println();
+    }
+
+   
+    
     
   }
     

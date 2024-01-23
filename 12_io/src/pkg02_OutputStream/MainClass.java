@@ -54,7 +54,7 @@ public class MainClass {
     }
     
     // 파일
-    File file = new File(dir, "sample1.dat");
+    File file = new File(dir, "sample1.dat");   
     
     // 파일 출력 스트림 선언 (파일 출력 스트림 = 데이터를 보내는 통로)
     FileOutputStream out = null;
@@ -62,7 +62,7 @@ public class MainClass {
     // 파일 출력 스트림 생성(예외처리 필수)
     try {
       // 파일 출력 스트림 생성 (무조건 생성 모드)
-      out = new FileOutputStream(file);
+      out = new FileOutputStream(file);     // 폴더(디렉터리)가 없을 때 FileNotFoundException 발생함
       
       // 출력할 데이터
       int c = 'A';
