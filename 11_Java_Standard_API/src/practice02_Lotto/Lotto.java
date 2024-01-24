@@ -16,15 +16,16 @@ public class Lotto {
   public int buyLotto() throws RuntimeException {
     
     Scanner sc = new Scanner(System.in);
-    int money = sc.nextInt();
+    int inputMoney = sc.nextInt();
     sc.close();
-   
-    if(money < 1000 || money > 100000) {
+    int money;
+    if(inputMoney < 1000 || inputMoney > 100000) {
       money = 0;
       throw new RuntimeException("금액이 잘못되었습니다");
+      
     }
-    
-    return (money / 5) * 1000;
+    money = (inputMoney / 1000) * 1000;
+    return money;
     
   }
   

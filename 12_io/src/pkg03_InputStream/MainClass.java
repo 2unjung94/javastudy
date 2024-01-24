@@ -1,10 +1,15 @@
 package pkg03_InputStream;
 
 import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.List;
+
+import pkg02_OutputStream.Employee;
 
 public class MainClass {
 
@@ -22,6 +27,23 @@ public class MainClass {
    * 2. 보조 스트림이므로 메인 스트림과 함께 사용해야 한다.
    * 3. 버퍼링을 지원하므로 입력 속도가 향상된다.
    */
+  
+  /*
+   * java.io.DataInputStream
+   * 1. 자바 변수로 구성된 데이터를 읽는 바이트 입력 스트림이다.
+   * 2. 보조 스트림이므로 메인 스트림과 함께 사용해야 한다.
+   * 3. 타입 별로 전용 메소드가 존재한다.
+   */
+  
+  /*
+   * java.io.ObjectInputStream
+   * 1. 객체로 구성된 데이터를 읽는 바이트 입력 스트림이다.
+   * 2. 보조 스트림이므로 메인 스트림과 함께 사용해야 한다.
+   * 3. 읽은 객체는 Object 타입으로 반환되므로 객체 타입으로 캐스팅해서 사용한다.
+   *    -> IOException과 ClassNotFoundException 예외가 발생할 수 있다. (catch 블록의 순서는 상관없다. 둘은 상속관계가 아니기 때문) 
+   */
+  
+  
   
   public static void method1() {
     
@@ -52,12 +74,6 @@ public class MainClass {
         
       }
       
-      // 확인
-      /*for(int i = 0 ; i < b.length ; i++) {
-        System.out.println(b[i]);
-        System.out.println((char)b[i]); Apple
-        
-      }*/
       System.out.println(new String(b));
       
       // 파일 입력 스트림 닫기
@@ -156,9 +172,70 @@ public class MainClass {
     
   }
   
+  public static void method4() {
+    
+    File dir = new File("\\storage");
+    File file = new File(dir, "sample4.dat");
+    
+    // 데이터 입력 스트림 선언
+    DataInputStream in = null;
+    
+    try {
+      
+      // 데이터 입력 스트림 생성
+      in = new DataInputStream(new FileInputStream(file));
+      
+      // 입력
+      String name = in.readUTF();             // 출력 시 out.writeUTF(name) 사용
+      int age = in.readInt();                 // 출력 시 out.writeInt(age) 사용
+      double height = in.readDouble();        // 출력 시 out.writeDouble(height) 사용
+      boolean isAdult = in.readBoolean();     // 출력 시 out.writeBoolean(isAdult) 사용
+      char gender = in.readChar();            // 출력 시 out.writeChar(gender) 사용
+      
+      System.out.println("name : "+ name + ", age : " + age + ", height : " + height + ", isAdult : " + isAdult + ", gender : " + gender);
+      
+      // 데이터 입력 스트림 닫기
+      in.close();
+      
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    
+  }
+
+  public static void method5() {
+    
+    File dir = new File("\\storage");
+    File file = new File(dir, "sample5.dat");
+    
+    // 객체 입력 스트림 선언
+    ObjectInputStream in = null;
+    try {
+      
+      // 객체 입력 스트림 생성
+      in = new ObjectInputStream(new FileInputStream(file));
+      
+      // 객체 입력
+      Employee emp1 = (Employee) in.readObject();   // 다른 패키지에 있는 클래스는 import 해줘야 한다.
+      List<Employee> emp2 = (List<Employee>) in.readObject();   // 현재 List<Employee> 형변환은 경고 뜰 수 밖에 없으므로 신경 꺼라
+         
+      
+      // 확인
+      System.out.println(emp1);
+      System.out.println(emp2.get(0));
+      System.out.println(emp2.get(1));
+      
+      in.close();
+      
+    } catch (IOException | ClassNotFoundException e ) {     // 동시에 catch 선언하는 방법
+      e.printStackTrace();
+    }
+    
+  }
+  
   public static void main(String[] args) {
     
-    method3();
+    method5();
     
   }
 

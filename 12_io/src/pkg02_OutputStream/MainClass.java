@@ -9,12 +9,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainClass {
+  
+  // 출력쪽은 닫지 않으면 파일이 비정상적으로 생성되므로 꼭 close()를 할 것
 
   /*
    * java.io.FileOutputStream
    * 1. 바이트 기반의 파일 출력 스트림이다. (= 바이트 기반의 파일을 보낸다.)
    * 2. 출력 단위
-   *    1) int    : 하나만 보낼때 (4바이트지만, 1바이트만 싣고 보낸다)
+   *    1) int    : 하나만 보낼때 (4바이트지만, 1바이트만 싣고 보낸다) (EOF가 -1이므로)
    *    2) byte[] : 여러개 보낼때
    */
   

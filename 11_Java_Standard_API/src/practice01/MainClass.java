@@ -345,7 +345,7 @@ public class MainClass {
   // 난수 생성
   
   // https://chichibaby.tistory.com/31 참고로 짜보기
-  public static int[] randomArray() {
+  public static int randomValue() {
     int[] random = new int[5];
     
     for(int n = 0 ; n <random.length ; n++) {
@@ -359,7 +359,8 @@ public class MainClass {
         }
       }
     }
-    return random;
+    int randomValue = random[0];
+    return randomValue;
   }
   public static void method9() {
     
@@ -390,30 +391,24 @@ public class MainClass {
     //  16 22 18 24 23
     int[][] bingo1 = new int[5][5];
     int[][] bingo2 = new int[5][5];
-
-    int[] random1 = randomArray();
-    int[] random2 = randomArray();
-    
     
     // 2차원 배열 생성
-    System.out.println("2차원 배열 생성");
     int num = 1;
     for(int i = 0 ; i < 5; i++) {    
       for(int j = 0; j < 5; j++) {
         bingo1[i][j] = num;
         num++;
-        
-        System.out.print(String.format("%3d", bingo1[i][j]));
-
       }
-      System.out.println();
     }
-    System.out.println();
     
     System.out.println("배열 변환");
     for(int n = 0 ; n < 5; n++) {
       for(int m = 0 ; m < 5; m++) {
-        bingo2[n][m] = bingo1[random1[n]][random2[m]];
+        int r1 = randomValue();
+        int r2 = randomValue();
+        if(n != r1 || m != r2) {
+          bingo2[n][m] = bingo1[r1][r2];  
+        }
         System.out.print(String.format("%3d", bingo2[n][m]));
       }
       System.out.println();
@@ -436,7 +431,7 @@ public class MainClass {
 //    method3();
 //    method4();
 //    method5();
-    method9();
+    method7();
  
   }
 
