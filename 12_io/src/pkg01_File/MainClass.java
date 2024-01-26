@@ -88,7 +88,7 @@ public class MainClass {
      * 8. isFile()       : 파일이면 true 반환
      */
     
- // JAVA_HOME 을 File 객체로 생성
+    // JAVA_HOME 을 File 객체로 생성
     File javaHome = new File("\\Program Files\\Java\\jdk-17");
     
     // JAVA_HOME 에 있는 모든 디렉터리와 파일을 File 객체로 가져오기
